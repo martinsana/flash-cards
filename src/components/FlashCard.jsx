@@ -1,11 +1,16 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function FlashCards({
   title = 'Title',
   description = 'Description that contain more words than title',
+  showFlashCardTitle = true,
 }) {
-  const [showTitle, setShowTitle] = useState(true);
+  const [showTitle, setShowTitle] = useState(showFlashCardTitle);
   const fontSizeClassName = showTitle ? 'text-xl' : 'text-sm';
+
+  useEffect(() => {
+    setShowTitle(showFlashCardTitle);
+  }, [showFlashCardTitle]);
 
   function hadleCardClick() {
     setShowTitle(currentShowTitle => !currentShowTitle);
