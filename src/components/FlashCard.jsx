@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react';
-
 export default function FlashCards({
+  id,
   title = 'Title',
   description = 'Description that contain more words than title',
   showFlashCardTitle = true,
+  onToggleFlashCard = null,
 }) {
-  const [showTitle, setShowTitle] = useState(showFlashCardTitle);
-  const fontSizeClassName = showTitle ? 'text-xl' : 'text-sm';
-
-  useEffect(() => {
-    setShowTitle(showFlashCardTitle);
-  }, [showFlashCardTitle]);
+  const fontSizeClassName = showFlashCardTitle ? 'text-xl' : 'text-sm';
 
   function hadleCardClick() {
-    setShowTitle(currentShowTitle => !currentShowTitle);
+    if (onToggleFlashCard) {
+      onToggleFlashCard(id);
+    }
   }
 
   return (
@@ -24,7 +21,7 @@ export default function FlashCards({
       style={{ fontFamily: 'monospace' }}
       onClick={hadleCardClick}
     >
-      {showTitle ? title : description}
+      {showFlashCardTitle ? title : description}
     </div>
   );
 }
